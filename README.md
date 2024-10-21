@@ -29,7 +29,7 @@ client = Groq(
 )
 ```
 ## Siapin contoh PDF sebagai data nya
-Dalam chatbot ini akan membaca file "<b>data.pdf</b>" sebagai data referensi chatbotnya. 
+Dalam chatbot ini akan membaca file "<b>data.pdf</b>" sebagai data referensi chatbotnya. <br>
 Note: Siapkan data.pdf sebelum menjalankan chatbotnya !
 
  ## Jalanin Chatbot nya
