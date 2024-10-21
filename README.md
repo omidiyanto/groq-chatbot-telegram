@@ -3,20 +3,20 @@
 <img src="https://github.com/user-attachments/assets/a357e8ae-33a9-4037-abc2-1a94d8707f5b"></img>
 
 2. Buat bot baru dengan pesan <b>/newbot</b> ikut panduannya untuk memasukkan nama bot di telegramnya, nantinya akan ada <b>TOKEN</b> yang diberikan, catat token ini karena akan digunakan nanti
-<img src="https://github.com/user-attachments/assets/47666538-61af-444c-ad60-d223cdf0cf36">
+<img src="https://github.com/user-attachments/assets/47666538-61af-444c-ad60-d223cdf0cf36"></img>
 3. Chatbot di telegram bisa diakses pada link yang diberikan, contohnya seperti ini
-<img src="https://github.com/user-attachments/assets/4a482215-d17e-487a-b2ce-38e4ef34578c">
+<img src="https://github.com/user-attachments/assets/4a482215-d17e-487a-b2ce-38e4ef34578c"></img>
 
 
 ## Generate GROQ API_KEY
 Buka "https://console.groq.com/keys", Klik <b>Create API Key</b>
-<img src="https://github.com/user-attachments/assets/40130610-80ad-41c8-b7cd-a909bf958fa0" >
+<img src="https://github.com/user-attachments/assets/40130610-80ad-41c8-b7cd-a909bf958fa0" ></img>
 
 Isi nama key nya bebas
-<img src="https://github.com/user-attachments/assets/2647a4b5-3862-4cc9-8e33-eb2bec14d4e0">
+<img src="https://github.com/user-attachments/assets/2647a4b5-3862-4cc9-8e33-eb2bec14d4e0"></img>
 
 Copy API_KEY yang anda dapatkan
-<img src="https://github.com/user-attachments/assets/7f822bd0-d1ba-4eb7-bc78-e106b16f6c3d"> 
+<img src="https://github.com/user-attachments/assets/7f822bd0-d1ba-4eb7-bc78-e106b16f6c3d"> </img>
 
 ## Clone Github Project ini
 Clone atau download project ini
@@ -49,6 +49,6 @@ Note: Siapkan data.pdf sebelum menjalankan chatbotnya !
 	 python app.py
 	 ```
 3) Coba chat melalui telegram bot yang telah dibuat
-<img src="https://github.com/user-attachments/assets/7bad6ea0-733e-4d6b-a4c3-b8be763bc489">
+<img src="https://github.com/user-attachments/assets/7bad6ea0-733e-4d6b-a4c3-b8be763bc489"></img>
 <br>
 Selamat, Chatbot anda telah berhasil diimplementasikan dan siap menjawab pertanyaan anda sesuai data PDF yang anda berikan !!
