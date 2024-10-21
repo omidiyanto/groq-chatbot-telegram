@@ -1,3 +1,11 @@
+## Buat Bot Telegram
+1. Cari dan buka <b>botfather</b> di telegram lalu klik "START"
+<img src="https://github.com/user-attachments/assets/a357e8ae-33a9-4037-abc2-1a94d8707f5b">
+2. Buat bot baru dengan pesan <b>/newbot</b> ikut panduannya untuk memasukkan nama bot di telegramnya, nantinya akan ada <b>TOKEN</b> yang diberikan, catat token ini karena akan digunakan nanti
+<img src="https://github.com/user-attachments/assets/47666538-61af-444c-ad60-d223cdf0cf36">
+3. Chatbot di telegram bisa diakses pada link yang diberikan, contohnya seperti ini
+<img src="https://github.com/user-attachments/assets/4a482215-d17e-487a-b2ce-38e4ef34578c">
+
 
 ## Generate GROQ API_KEY
 Buka "https://console.groq.com/keys", Klik <b>Create API Key</b>
@@ -12,24 +20,22 @@ Copy API_KEY yang anda dapatkan
 ## Clone Github Project ini
 Clone atau download project ini
 ```bash
-git clone https://github.com/omidiyanto/groq-chatbot-example.git
+git clone https://github.com/omidiyanto/groq-chatbot-telegram.git
 ```
 Masuk dalam folder projectnya
 ```bash
-cd groq-chatbot-example
+cd groq-chatbot-telegram
 ```
 
-## Isi API_KEY ke app.py
-Copy paste API_KEY anda di <b>app.py</b>, bagian:
+## Isi API_KEY dan Token telegram ke app.py
+Copy paste API_KEY dan token bot telegram anda di <b>app.py</b>, bagian:
 ```
-# Initialize conversation history and Groq client
-conversation_history = []
-client = Groq(
-    api_key="API_KEY_GROQ_ANDA",
-)
+# ubah variabel ini sesuai dengan API_KEY dan Token anda
+GROQ_API_KEY="API_KEY_GROQ"
+TOKEN_TELEGRAM_BOT="TOKEN_BOT_TELEGRAM"
 ```
 ## Siapin contoh PDF sebagai data nya
-Dalam chatbot ini akan membaca file "<b>data.pdf</b>" sebagai data referensi chatbotnya. <br>
+Dalam chatbot ini akan membaca file "<b>data.pdf</b>" sebagai data referensi chatbotnya. 
 Note: Siapkan data.pdf sebelum menjalankan chatbotnya !
 
  ## Jalanin Chatbot nya
@@ -41,3 +47,7 @@ Note: Siapkan data.pdf sebelum menjalankan chatbotnya !
 	 ```bash
 	 python app.py
 	 ```
+3) Coba chat melalui telegram bot yang telah dibuat
+<img src="https://github.com/user-attachments/assets/7bad6ea0-733e-4d6b-a4c3-b8be763bc489">
+<br>
+Selamat, Chatbot anda telah berhasil diimplementasikan dan siap menjawab pertanyaan anda sesuai data PDF yang anda berikan !!
