@@ -35,7 +35,7 @@ GROQ_API_KEY="API_KEY_GROQ"
 TOKEN_TELEGRAM_BOT="TOKEN_BOT_TELEGRAM"
 ```
 ## Siapin contoh PDF sebagai data nya
-Dalam chatbot ini akan membaca file "<b>data.pdf</b>" sebagai data referensi chatbotnya. 
+Dalam chatbot ini akan membaca file "<b>data.pdf</b>" sebagai data referensi chatbotnya. <br>
 Note: Siapkan data.pdf sebelum menjalankan chatbotnya !
 
  ## Jalanin Chatbot nya
