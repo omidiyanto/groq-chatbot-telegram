@@ -1,7 +1,6 @@
 ## Buat Bot Telegram
 1. Cari dan buka <b>botfather</b> di telegram lalu klik "START"
 <img src="https://github.com/user-attachments/assets/a357e8ae-33a9-4037-abc2-1a94d8707f5b"></img>
-
 2. Buat bot baru dengan pesan <b>/newbot</b> ikut panduannya untuk memasukkan nama bot di telegramnya, nantinya akan ada <b>TOKEN</b> yang diberikan, catat token ini karena akan digunakan nanti
 <img src="https://github.com/user-attachments/assets/47666538-61af-444c-ad60-d223cdf0cf36"></img>
 3. Chatbot di telegram bisa diakses pada link yang diberikan, contohnya seperti ini
