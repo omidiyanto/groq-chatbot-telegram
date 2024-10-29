@@ -27,8 +27,8 @@ Masuk dalam folder projectnya
 cd groq-chatbot-telegram
 ```
 
-## Isi API_KEY dan Token telegram ke main.py
-Copy paste API_KEY dan token bot telegram anda di <b>main.py</b>, bagian:
+## Isi API_KEY dan Token telegram ke app.py
+Copy paste API_KEY dan token bot telegram anda di <b>app.py</b>, bagian:
 ```
 # ubah variabel ini sesuai dengan API_KEY dan Token anda
 GROQ_API_KEY="API_KEY_GROQ"
@@ -45,9 +45,13 @@ Note: Siapkan data.pdf sebelum menjalankan chatbotnya !
 	 ```
  2) Run chatbotnya 
 	 ```bash
-	 python main.py
+	 python app.py
 	 ```
 3) Coba chat melalui telegram bot yang telah dibuat
 <img src="https://github.com/user-attachments/assets/7bad6ea0-733e-4d6b-a4c3-b8be763bc489"></img>
 <br>
 Selamat, Chatbot anda telah berhasil diimplementasikan dan siap menjawab pertanyaan anda sesuai data PDF yang anda berikan !!
+<br>
+
+4) Buka Dashboard Management di browser dengan URL http://localhost:5000
+<img src="https://github.com/user-attachments/assets/d8d57f58-1454-4b76-aba4-72cddd067c64"></img>
