@@ -1,3 +1,7 @@
+## TRY THE DEMO
+https://dashboard-chatbot.omidiyanto.my.id/
+http://t.me/ominewchatbot
+
 ## Buat Bot Telegram
 1. Cari dan buka <b>botfather</b> di telegram lalu klik "START"
 <img src="https://github.com/user-attachments/assets/a357e8ae-33a9-4037-abc2-1a94d8707f5b"></img>
