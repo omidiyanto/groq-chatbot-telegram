@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmReset(event) {
+            event.preventDefault(); // Prevent form submission
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apa anda yakin ingin menghapus?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Iya',
+                cancelButtonText: 'Tidak'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('reset-form').submit(); // Submit the form if confirmed
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/upload">Update Data PDF</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logs">Lihat Logs</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <h1 class="text-center mt-5">Logs Pertanyaan dan Response</h1>
+        <div class="text-center mt-3">
+            <a href="/download" class="btn btn-primary">Download Log CSV</a>
+            <form id="reset-form" action="/reset" method="post" style="display:inline;" onsubmit="confirmReset(event);">
+                <button type="submit" class="btn btn-danger">Reset Logs</button>
+            </form>
+        </div>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Pertanyaan</th>
+                    <th>Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                <tr>
+                    <td>{{ log.Pertanyaan }}</td>
+                    <td>{{ log.Response }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+    </div>
+</body>
+</html>
