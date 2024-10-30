@@ -58,4 +58,4 @@ Selamat, Chatbot anda telah berhasil diimplementasikan dan siap menjawab pertany
 <br>
 
 4) Buka Dashboard Management di browser dengan URL http://localhost:5000
-<img src="https://github.com/user-attachments/assets/d8d57f58-1454-4b76-aba4-72cddd067c64"></img>
+<img src="https://github.com/user-attachments/assets/617a86fc-ab3a-4308-a3d8-88f098900e3b"></img>
