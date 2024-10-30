@@ -3,72 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logs</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Logs Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <style>
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .nav-link {
+            font-weight: 500;
+            padding: 0.8rem 1.5rem !important;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #0d6efd !important;
+            transform: translateY(-2px);
+        }
+        .page-header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem 0;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+        .table-container {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,.05);
+        }
+        .table {
+            margin-bottom: 0;
+        }
+        .table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+        }
+        .action-button {
+            transition: all 0.3s ease;
+        }
+        .action-button:hover {
+            transform: translateY(-2px);
+        }
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            display: inline-flex;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-chart-line text-primary me-2"></i>
+                ChatBot Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/upload"><i class="fas fa-upload me-1"></i> Update Data PDF</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/logs"><i class="fas fa-history me-1"></i> Lihat Logs</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="page-header text-center">
+            <div class="icon-circle bg-primary bg-opacity-10 mb-3">
+                <i class="fas fa-history fa-2x text-primary"></i>
+            </div>
+            <h1 class="display-5 fw-bold mb-3">Logs Pertanyaan dan Response</h1>
+            <p class="lead text-muted mb-4">Riwayat interaksi dan aktivitas sistem</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="/download" class="btn btn-primary btn-lg action-button">
+                    <i class="fas fa-download me-2"></i>Download Log CSV
+                </a>
+                <form id="reset-form" action="/reset" method="post" style="display:inline;" onsubmit="confirmReset(event);">
+                    <button type="submit" class="btn btn-danger btn-lg action-button">
+                        <i class="fas fa-trash-alt me-2"></i>Reset Logs
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <i class="fas fa-question-circle me-2 text-primary"></i>
+                            Pertanyaan
+                        </th>
+                        <th scope="col">
+                            <i class="fas fa-comment-dots me-2 text-primary"></i>
+                            Response
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ log.Pertanyaan }}</td>
+                        <td>{{ log.Response }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function confirmReset(event) {
-            event.preventDefault(); // Prevent form submission
+            event.preventDefault();
             Swal.fire({
                 title: 'Konfirmasi',
                 text: 'Apa anda yakin ingin menghapus?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Iya',
-                cancelButtonText: 'Tidak'
+                cancelButtonText: 'Tidak',
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                reverseButtons: true,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    document.getElementById('reset-form').submit(); // Submit the form if confirmed
+                    document.getElementById('reset-form').submit();
                 }
             });
         }
     </script>
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/upload">Update Data PDF</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logs">Lihat Logs</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        
-        <h1 class="text-center mt-5">Logs Pertanyaan dan Response</h1>
-        <div class="text-center mt-3">
-            <a href="/download" class="btn btn-primary">Download Log CSV</a>
-            <form id="reset-form" action="/reset" method="post" style="display:inline;" onsubmit="confirmReset(event);">
-                <button type="submit" class="btn btn-danger">Reset Logs</button>
-            </form>
-        </div>
-        <table class="table table-striped mt-3">
-            <thead>
-                <tr>
-                    <th>Pertanyaan</th>
-                    <th>Response</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for log in logs %}
-                <tr>
-                    <td>{{ log.Pertanyaan }}</td>
-                    <td>{{ log.Response }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        
-    </div>
 </body>
 </html>
