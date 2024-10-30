@@ -49,7 +49,7 @@ Note: Siapkan data.pdf sebelum menjalankan chatbotnya !
 	 ```
  2) Run chatbotnya 
 	 ```bash
-	 python app.py
+	 python main.py
 	 ```
 3) Coba chat melalui telegram bot yang telah dibuat
 <img src="https://github.com/user-attachments/assets/7bad6ea0-733e-4d6b-a4c3-b8be763bc489"></img>
