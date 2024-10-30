@@ -4,77 +4,215 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload PDF</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .upload-container {
-            height: 100%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 50px;
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
         }
-        * {
-            box-sizing: border-box;
-            margin: 0;
+        .nav-link {
+            font-weight: 500;
+            padding: 0.8rem 1.5rem !important;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #0d6efd !important;
+            transform: translateY(-2px);
+        }
+        .page-header {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem 0;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+        .upload-container {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,.05);
+            margin-top: 2rem;
         }
         .upload-label {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            width: 500px;  /* Width for the 3:4 ratio */
-            height: 120px; /* Height for the 3:4 ratio */
+            width: 100%;
+            min-height: 200px;
             text-align: center;
-            padding: 20px;
-            border: 2px dashed #007bff;
-            border-radius: 5px;
-            transition: background-color 0.2s;
-            margin: 0 auto; /* Center the box */
+            padding: 2rem;
+            border: 2px dashed #0d6efd;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
         }
         .upload-label:hover {
-            background-color: #e9ecef;
+            background: #e9ecef;
+            transform: translateY(-2px);
         }
         .upload-input {
             display: none;
         }
+        .upload-icon {
+            font-size: 3rem;
+            color: #0d6efd;
+            margin-bottom: 1rem;
+        }
         .success-message {
-            color: green;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
             text-align: center;
-            margin-top: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+        .upload-button {
+            transition: all 0.3s ease;
+        }
+        .upload-button:hover {
+            transform: translateY(-2px);
+        }
+        .icon-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            display: inline-flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/upload">Update Data PDF</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logs">Lihat Logs</a>
-                        </li>
-                    </ul>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-chart-line text-primary me-2"></i>
+                ChatBot Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/upload"><i class="fas fa-upload me-1"></i> Update Data PDF</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logs"><i class="fas fa-history me-1"></i> Lihat Logs</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                   
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <h1 class="mt-5" style="text-align: center;">Upload File PDF</h1>
+    <div class="container py-4">
+        <div class="page-header text-center">
+            <div class="icon-circle bg-primary bg-opacity-10 mb-3">
+                <i class="fas fa-file-pdf fa-2x text-primary"></i>
+            </div>
+            <h1 class="display-5 fw-bold mb-3">Upload File PDF</h1>
+            <p class="lead text-muted mb-4">Pilih dan unggah file PDF Anda untuk diproses</p>
+        </div>
+
         {% if success_message %}
-        <div class="success-message">{{ success_message }}</div>
+        <div class="success-message">
+            <i class="fas fa-check-circle me-2"></i>
+            {{ success_message }}
+        </div>
         {% endif %}
-        <form method="POST" enctype="multipart/form-data">
-            <label class="upload-label" for="file">Pilih file PDF untuk di-upload</label>
-            <input type="file" class="upload-input" id="file" name="file" accept=".pdf" required>
-            <button type="submit" class="btn btn-primary mt-3" style="display: block; margin: 0 auto;">Upload</button>
-        </form>
+
+        <div class="upload-container">
+            <form method="POST" enctype="multipart/form-data">
+                <label class="upload-label" for="file">
+                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                    <span class="h5 mb-2">Drag & Drop file PDF di sini</span>
+                    <span class="text-muted">atau klik untuk memilih file</span>
+                </label>
+                <input type="file" class="upload-input" id="file" name="file" accept=".pdf" required>
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg upload-button">
+                        <i class="fas fa-upload me-2"></i>
+                        Upload File
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Add visual feedback for file selection
+        document.getElementById('file').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name;
+            const uploadLabel = document.querySelector('.upload-label');
+            if (fileName) {
+                uploadLabel.innerHTML = `
+                    <i class="fas fa-file-pdf upload-icon"></i>
+                    <span class="h5 mb-2">${fileName}</span>
+                    <span class="text-muted">Klik untuk mengganti file</span>
+                `;
+            }
+        });
+
+        // Add drag and drop functionality
+        const uploadLabel = document.querySelector('.upload-label');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadLabel.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            uploadLabel.style.backgroundColor = '#e9ecef';
+            uploadLabel.style.borderColor = '#0d6efd';
+        }
+
+        function unhighlight(e) {
+            uploadLabel.style.backgroundColor = '#f8f9fa';
+            uploadLabel.style.borderColor = '#0d6efd';
+        }
+
+        uploadLabel.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const file = dt.files[0];
+            document.getElementById('file').files = dt.files;
+            
+            if (file) {
+                uploadLabel.innerHTML = `
+                    <i class="fas fa-file-pdf upload-icon"></i>
+                    <span class="h5 mb-2">${file.name}</span>
+                    <span class="text-muted">Klik untuk mengganti file</span>
+                `;
+            }
+        }
+    </script>
 </body>
 </html>
