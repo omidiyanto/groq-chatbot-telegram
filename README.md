@@ -31,8 +31,8 @@ Masuk dalam folder projectnya
 cd groq-chatbot-telegram
 ```
 
-## Isi API_KEY dan Token telegram ke app.py
-Copy paste API_KEY dan token bot telegram anda di <b>app.py</b>, bagian:
+## Isi API_KEY dan Token telegram ke main.py
+Copy paste API_KEY dan token bot telegram anda di <b>main.py</b>, bagian:
 ```
 # ubah variabel ini sesuai dengan API_KEY dan Token anda
 GROQ_API_KEY="API_KEY_GROQ"
