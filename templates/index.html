@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Management - ChatBot</title>
+    <title>Logs Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         .navbar {
             box-shadow: 0 2px 4px rgba(0,0,0,.1);
@@ -19,41 +20,46 @@
             color: #0d6efd !important;
             transform: translateY(-2px);
         }
-        .hero-section {
+        .page-header {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 4rem 0;
+            padding: 2rem 0;
             border-radius: 15px;
-            margin-top: 2rem;
+            margin: 2rem 0;
         }
-        .stat-card {
+        .table-container {
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 1.5rem;
-            margin: 1rem 0;
             box-shadow: 0 4px 6px rgba(0,0,0,.05);
-            transition: transform 0.3s ease;
         }
-        .stat-card:hover {
-            transform: translateY(-5px);
+        .table {
+            margin-bottom: 0;
         }
-        .action-card {
-            border: none;
-            border-radius: 12px;
+        .table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            padding: 1rem;
+            font-weight: 600;
+        }
+        .table td {
+            padding: 1rem;
+            vertical-align: middle;
+        }
+        .action-button {
             transition: all 0.3s ease;
-            height: 100%;
         }
-        .action-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,.1);
+        .action-button:hover {
+            transform: translateY(-2px);
         }
         .icon-circle {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1rem;
+            display: inline-flex;
         }
     </style>
 </head>
@@ -70,108 +76,94 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/"><i class="fas fa-home me-1"></i> Home</a>
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i> Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/upload"><i class="fas fa-upload me-1"></i> Update Data PDF</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/logs"><i class="fas fa-history me-1"></i> Lihat Logs</a>
+                        <a class="nav-link active" href="/logs"><i class="fas fa-history me-1"></i> Lihat Logs</a>
                     </li>
                 </ul>
                 <div class="d-flex">
+                    
                 </div>
             </div>
         </div>
     </nav>
 
     <div class="container py-4">
-        <div class="hero-section">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <h1 class="display-4 fw-bold mb-4">Selamat Datang di Dashboard Untuk Manage ChatBot anda</h1>
-                        <p class="lead text-muted mb-4">Kelola dan monitor data Chatbot Anda dengan mudah dan efisien</p>
-                        <div class="d-flex gap-3">
-                            <a href="/upload" class="btn btn-primary btn-lg">
-                                <i class="fas fa-upload me-2"></i>Update Data PDF
-                            </a>
-                            <a href="/logs" class="btn btn-outline-secondary btn-lg">
-                                <i class="fas fa-history me-2"></i>Lihat Logs
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <img src="https://github.com/user-attachments/assets/258a3a24-3b3e-4c5c-b3c4-55c2d0879aba" alt="Dashboard illustration" class="img-fluid rounded-3">
-                    </div>
-                </div>
+        <div class="page-header text-center">
+            <div class="icon-circle bg-primary bg-opacity-10 mb-3">
+                <i class="fas fa-history fa-2x text-primary"></i>
+            </div>
+            <h1 class="display-5 fw-bold mb-3">Logs Pertanyaan dan Response</h1>
+            <p class="lead text-muted mb-4">Riwayat interaksi dan aktivitas sistem</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="/download" class="btn btn-primary btn-lg action-button">
+                    <i class="fas fa-download me-2"></i>Download Log CSV
+                </a>
+                <form id="reset-form" action="/reset" method="post" style="display:inline;" onsubmit="confirmReset(event);">
+                    <button type="submit" class="btn btn-danger btn-lg action-button">
+                        <i class="fas fa-trash-alt me-2"></i>Reset Logs
+                    </button>
+                </form>
             </div>
         </div>
 
-        <div class="row mt-5">
-            <div class="col-md-4">
-                <div class="stat-card">
-                    <div class="icon-circle bg-primary bg-opacity-10">
-                        <i class="fas fa-file-pdf fa-2x text-primary"></i>
-                    </div>
-                    <h3 class="fs-2 fw-bold">254</h3>
-                    <p class="text-muted mb-0">Total PDF Diupload</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-card">
-                    <div class="icon-circle bg-success bg-opacity-10">
-                        <i class="fas fa-check-circle fa-2x text-success"></i>
-                    </div>
-                    <h3 class="fs-2 fw-bold">98%</h3>
-                    <p class="text-muted mb-0">Tingkat Keberhasilan</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="stat-card">
-                    <div class="icon-circle bg-info bg-opacity-10">
-                        <i class="fas fa-clock fa-2x text-info"></i>
-                    </div>
-                    <h3 class="fs-2 fw-bold">1,254</h3>
-                    <p class="text-muted mb-0">Total Aktivitas</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-5 g-4">
-            <div class="col-md-6">
-                <div class="card action-card">
-                    <div class="card-body p-4">
-                        <div class="icon-circle bg-primary bg-opacity-10 mb-3">
-                            <i class="fas fa-upload fa-2x text-primary"></i>
-                        </div>
-                        <h4>Update Data PDF</h4>
-                        <p class="text-muted">Upload dan perbarui data PDF Anda dengan mudah dan cepat</p>
-                        <a href="/upload" class="btn btn-primary">
-                            Mulai Upload
-                            <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card action-card">
-                    <div class="card-body p-4">
-                        <div class="icon-circle bg-secondary bg-opacity-10 mb-3">
-                            <i class="fas fa-history fa-2x text-secondary"></i>
-                        </div>
-                        <h4>Lihat Logs Aktivitas</h4>
-                        <p class="text-muted">Monitor semua aktivitas dan riwayat perubahan data</p>
-                        <a href="/logs" class="btn btn-secondary">
-                            Lihat Logs
-                            <i class="fas fa-arrow-right ms-2"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <div class="table-container">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <i class="fas fa-question-circle me-2 text-primary"></i>
+                            Pertanyaan
+                        </th>
+                        <th scope="col">
+                            <i class="fas fa-comment-dots me-2 text-primary"></i>
+                            Response
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ log.Pertanyaan }}</td>
+                        <td>{{ log.Response }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmReset(event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Konfirmasi',
+                text: 'Apa anda yakin ingin menghapus?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Iya',
+                cancelButtonText: 'Tidak',
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                reverseButtons: true,
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                    popup: 'animate__animated animate__fadeOutUp'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('reset-form').submit();
+                }
+            });
+        }
+    </script>
 </body>
 </html>
